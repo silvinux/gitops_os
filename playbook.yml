@@ -1,0 +1,32 @@
+---
+- hosts: motd
+  gather_facts: yes
+  remote_user: ansible
+  collections:
+  - community.general
+  vars:
+    keepalived_priority: 100
+    keepalived_state: MASTER
+    keepalived_vip: 192.168.1.1
+    keepalived_vrid: 10
+    keepalived_vrrp_instance_name: "HA_10"
+  tasks:
+    - name: "Read env Defintions"
+      include_vars:
+        file: "{{ item.src }}"
+      with_filetree: "group_vars/tst/"
+      when: item.state == 'file'
+      register: contents
+
+    - name: Configure Message of today
+      template:
+        src: templates/motd-facts.j2
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+      become: true
+
+...
+
+# ansible-playbook -i inventario playbook.yml -e '{group_name_owner: linux-admins,server_env: dev}'

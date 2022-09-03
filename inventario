@@ -1,0 +1,5 @@
+[motd]
+rhel7
+
+[dev:children]
+motd
