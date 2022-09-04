@@ -6,4 +6,4 @@
     - role: dispatch
       vars:
         linux_config_dispatcher_roles:
-          - {role: motd, var: linux_config_motd, tags: motd
+          - {role: os_mgmt.linux_config.motd, var: linux_config_motd, tags: motd
