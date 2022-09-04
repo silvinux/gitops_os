@@ -3,7 +3,7 @@
   #gather_facts: yes
   #remote_user: ansible
   roles:
-    - role: dispatch
+    - role: os_mgmt.linux_config.dispatch
       vars:
         linux_config_dispatcher_roles:
-          - {role: os_mgmt.linux_config.motd, var: linux_config_motd, tags: motd}
+          - {role: motd, var: linux_config_motd, tags: motd}
